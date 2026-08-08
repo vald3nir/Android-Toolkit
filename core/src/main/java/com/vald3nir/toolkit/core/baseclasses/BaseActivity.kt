@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.vald3nir.toolkit.core.theme.presentation.SelectThemeViewModel
 import com.vald3nir.toolkit.core.utils.extensions.isSystemInDarkTheme
+import com.vald3nir.toolkit.designsystem.theme.domain.ThemeBrandEnum
 import com.vald3nir.toolkit.designsystem.theme.domain.ThemeSettingsDTO
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.StateFlow
@@ -34,6 +35,10 @@ abstract class BaseActivity : ComponentActivity() {
 
     protected var themeSettings by mutableStateOf(ThemeSettingsDTO())
         private set
+
+    fun alterThemeColor(themaBrandEnum: ThemeBrandEnum) {
+        viewModel.updateThemeBrand(themaBrandEnum)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
