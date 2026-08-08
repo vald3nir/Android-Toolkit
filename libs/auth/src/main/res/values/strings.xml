@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============ AUTH FEATURE ============ -->
+    <string name="auth_screen_title">Autenticação de usuário</string>
+    <string name="auth_btn_login_label">Fazer login</string>
+    <string name="auth_sign_in_with_your_google_account">Fazer login com a conta Google</string>
+    <string name="auth_login_info">Use sua conta Google para salvar seus dados na nuvem com segurança. Se for seu primeiro acesso, uma conta será criada automaticamente.</string>
+    <string name="auth_create_account_offline_warning">É necessário ter conexão com a internet para autenticar-se.</string>
+
+    <!-- ============ TERMS & POLICIES ============ -->
+    <string name="auth_terms_politics_description">Ao fazer login, você concorda com os nossos</string>
+    <string name="auth_terms_and_conditions">Termos e Condições</string>
+    <string name="auth_privacy_policy">Política de Privacidade</string>
+
+    <!-- ============ NETWORK ============ -->
+    <string name="auth_wifi_connect">Selecionar rede Wi-Fi</string>
+
+</resources>

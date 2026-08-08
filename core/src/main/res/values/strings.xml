@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============ NOTIFICATIONS ============ -->
+    <string name="default_sync_work_notification_channel_name">Atualizações no app</string>
+    <string name="default_sync_work_notification_channel_description">Atualizações de app em segundo plano</string>
+
+    <!-- ============ THEME ============ -->
+    <string name="select_theme_title">Seleção de tema</string>
+    <string name="select_theme_brands">Seleção de cor</string>
+    <string name="select_theme_preferences">Preferências do tema</string>
+    <string name="select_theme_use_dynamic_color">Usar tema dinâmico?</string>
+    <string name="select_theme_btn_ok">OK</string>
+
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============ COMMON ============ -->
+    <string name="logotype">Logotipo</string>
+    <string name="btn_add">Adicionar</string>
+    <string name="no_items_registered">Sem itens cadastrados</string>
+
+    <!-- ============ PROFILE ============ -->
+    <string name="profile_screen_user_not_authenticated">Usuário não autenticado</string>
+    <string name="profile_btn_login">Fazer login</string>
+    <string name="app_version">Versão do app</string>
+
+</resources>
