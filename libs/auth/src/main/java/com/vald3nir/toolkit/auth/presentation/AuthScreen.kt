@@ -74,6 +74,7 @@ fun AuthScreen(
 
     if (uiState is BaseUiState.FinishState) {
         LaunchedEffect(Unit) {
+            viewModel.notifyState(BaseUiState.IdleState)
             onSuccess()
         }
         return

@@ -34,7 +34,11 @@ class ModulePlugin : Plugin<Project> {
             }
             packaging {
                 resources {
-                    excludes += "META-INF/*"
+                    excludes += setOf(
+                        "META-INF/*",
+                        "META-INF/*.kotlin_module",
+                        "META-INF/versions/**",
+                    )
                 }
             }
         }
