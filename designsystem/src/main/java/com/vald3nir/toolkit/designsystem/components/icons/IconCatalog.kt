@@ -1,13 +1,5 @@
 package com.vald3nir.toolkit.designsystem.components.icons
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
@@ -20,6 +12,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Addchart
 import androidx.compose.material.icons.filled.Backpack
 import androidx.compose.material.icons.filled.BarChart
+import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
@@ -61,8 +54,10 @@ import androidx.compose.material.icons.filled.ShoppingBasket
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.SolarPower
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThermostatAuto
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material.icons.outlined.AddShoppingCart
 import androidx.compose.material.icons.outlined.AttachMoney
 import androidx.compose.material.icons.outlined.Bookmarks
@@ -81,19 +76,12 @@ import androidx.compose.material.icons.rounded.Bookmarks
 import androidx.compose.material.icons.rounded.Grid3x3
 import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material.icons.rounded.ViewDay
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.vald3nir.toolkit.designsystem.annotations.ThemePreviews
-import com.vald3nir.toolkit.designsystem.components.ToolkitSpacingMd
-import com.vald3nir.toolkit.designsystem.components.ToolkitSpacingXl
-import com.vald3nir.toolkit.designsystem.components.texts.ToolkitText
-import com.vald3nir.toolkit.designsystem.components.texts.ToolkitTextStyle
-import com.vald3nir.toolkit.designsystem.extensions.ToolkitPreviewContainer
+import com.vald3nir.toolkit.designsystem.components.icons.custom.bar_chart_4_bars
+import com.vald3nir.toolkit.designsystem.components.icons.custom.wifi_device
+
+// Catalog: https://fonts.google.com/icons?icon.size=24&icon.color=%23e3e3e3&icon.platform=android
 
 object ToolkitIconCatalog {
-
     val AccountCircle = Icons.Default.AccountCircle
     val Add = Icons.Default.Add
     val AddChart = Icons.Filled.Addchart
@@ -104,6 +92,8 @@ object ToolkitIconCatalog {
     val AttachMoney = Icons.Outlined.AttachMoney
     val Backpack = Icons.Default.Backpack
     val BarChart = Icons.Default.BarChart
+    val BarChart4Bars = bar_chart_4_bars
+    val Bolt = Icons.Default.Bolt
     val Bookmark = Icons.Rounded.Bookmark
     val BookmarkBorder = Icons.Rounded.BookmarkBorder
     val Bookmarks = Icons.Rounded.Bookmarks
@@ -143,6 +133,8 @@ object ToolkitIconCatalog {
     val Person = Icons.Default.Person
     val Pin = Icons.Default.Pin
     val PhoneAndroid = Icons.Default.PhoneAndroid
+    val WaterDrop = Icons.Default.WaterDrop
+    val Thermometer = Icons.Default.ThermostatAuto
     val QrCodeScanner = Icons.Default.QrCodeScanner
     val Remove = Icons.Default.Remove
     val RemoveCircleOutline = Icons.Default.RemoveCircleOutline
@@ -165,107 +157,6 @@ object ToolkitIconCatalog {
     val VisibilityOff = Icons.Default.VisibilityOff
     val Warning = Icons.Outlined.Warning
     val Wifi = Icons.Outlined.Wifi
+    val WifiDevice = wifi_device
     val WifiOff = Icons.Outlined.WifiOff
-
-    val allIcons = listOf(
-        "AccountCircle" to AccountCircle,
-        "Add" to Add,
-        "AddChart" to AddChart,
-        "AddShoppingCart" to AddShoppingCart,
-        "ArrowBack" to ArrowBack,
-        "ArrowForward" to ArrowForward,
-        "ArrowIndicatorRight" to ArrowIndicatorRight,
-        "AttachMoney" to AttachMoney,
-        "Backpack" to Backpack,
-        "BarChart" to BarChart,
-        "Bookmark" to Bookmark,
-        "BookmarkBorder" to BookmarkBorder,
-        "Bookmarks" to Bookmarks,
-        "BookmarksBorder" to BookmarksBorder,
-        "Check" to Check,
-        "ChevronDown" to ChevronDown,
-        "ChevronLeft" to ChevronLeft,
-        "ChevronRight" to ChevronRight,
-        "ChevronUp" to ChevronUp,
-        "Close" to Close,
-        "CloudSync" to CloudSync,
-        "ContentCopy" to ContentCopy,
-        "DarkMode" to DarkMode,
-        "DateRange" to DateRange,
-        "Delete" to Delete,
-        "DirectionsCar" to DirectionsCar,
-        "Downloading" to Downloading,
-        "Edit" to Edit,
-        "Email" to Email,
-        "ExitToApp" to ExitToApp,
-        "Favorite" to Favorite,
-        "FavoriteBorder" to FavoriteBorder,
-        "Grid3x3" to Grid3x3,
-        "Home" to Home,
-        "Inbox" to Inbox,
-        "Info" to Info,
-        "LightMode" to LightMode,
-        "Logout" to Logout,
-        "Mall" to Mall,
-        "Menu" to Menu,
-        "MoreVert" to MoreVert,
-        "Notifications" to Notifications,
-        "Paid" to Paid,
-        "Palette" to Palette,
-        "Password" to Password,
-        "PedalBike" to PedalBike,
-        "Person" to Person,
-        "Pin" to Pin,
-        "PhoneAndroid" to PhoneAndroid,
-        "Remove" to Remove,
-        "RemoveCircleOutline" to RemoveCircleOutline,
-        "RemoveShoppingCart" to RemoveShoppingCart,
-        "Save" to Save,
-        "Science" to Science,
-        "Search" to Search,
-        "Settings" to Settings,
-        "Share" to Share,
-        "ShoppingBasket" to ShoppingBasket,
-        "ShoppingCart" to ShoppingCart,
-        "ShortText" to ShortText,
-        "SolarPower" to SolarPower,
-        "Star" to Star,
-        "Tag" to Tag,
-        "Upcoming" to Upcoming,
-        "UpcomingBorder" to UpcomingBorder,
-        "ViewDay" to ViewDay,
-        "Visibility" to Visibility,
-        "VisibilityOff" to VisibilityOff,
-        "Warning" to Warning,
-        "Wifi" to Wifi,
-        "WifiOff" to WifiOff
-    )
-}
-
-@ThemePreviews
-@Composable
-private fun Preview() {
-    ToolkitPreviewContainer {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(6),
-            modifier = Modifier.padding(ToolkitSpacingMd),
-            horizontalArrangement = Arrangement.spacedBy(ToolkitSpacingMd),
-            verticalArrangement = Arrangement.spacedBy(ToolkitSpacingMd)
-        ) {
-            items(ToolkitIconCatalog.allIcons) { (name, icon) ->
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    ToolkitIcon(
-                        imageVector = icon,
-                        contentDescription = name,
-                        modifier = Modifier.size(ToolkitSpacingXl),
-                        tint = MaterialTheme.colorScheme.onSurface
-                    )
-                    ToolkitText(text = name, style = ToolkitTextStyle.LabelSmall)
-                }
-            }
-        }
-    }
 }

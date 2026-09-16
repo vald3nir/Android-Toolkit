@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,7 +33,8 @@ import com.vald3nir.toolkit.designsystem.components.texts.ToolkitText
 import com.vald3nir.toolkit.designsystem.components.texts.ToolkitTextStyle
 import com.vald3nir.toolkit.designsystem.extensions.ToolkitPreviewContainer
 
-data class ToolkitItemListDTO(
+data class ToolkitItemListUiModel(
+    val id: String = "",
     val title: String,
     val description: String,
     val icon: ImageVector,
@@ -41,11 +43,16 @@ data class ToolkitItemListDTO(
 )
 
 @Composable
-fun ToolkitItemList(modifier: Modifier = Modifier, item: ToolkitItemListDTO, onclick: (ToolkitItemListDTO) -> Unit = {}) {
+fun ToolkitItemList(
+    modifier: Modifier = Modifier,
+    item: ToolkitItemListUiModel,
+    onClick: (id: String) -> Unit = {},
+    imageVector: ImageVector?
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onclick(item) }
+            .clickable { onClick(item.id) }
             .padding(vertical = ToolkitSpacingMd),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -62,12 +69,17 @@ fun ToolkitItemList(modifier: Modifier = Modifier, item: ToolkitItemListDTO, onc
                 style = ToolkitTextStyle.TitleSmall
             )
         }
+        if (imageVector != null) {
+            IconButton(onClick = { onClick(item.id) }) {
+                ToolkitIcon(imageVector = imageVector)
+            }
+        }
     }
     ToolkitDivider()
 }
 
 @Composable
-private fun DeviceIcon(item: ToolkitItemListDTO) {
+private fun DeviceIcon(item: ToolkitItemListUiModel) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -88,18 +100,18 @@ private fun DeviceIcon(item: ToolkitItemListDTO) {
 private fun Preview() {
     ToolkitPreviewContainer {
         val devices = listOf(
-            ToolkitItemListDTO(title = "titulo 1", description = "descrição 1", icon = ToolkitIconCatalog.PhoneAndroid, iconTint = Color(0xFF4285F4)),
-            ToolkitItemListDTO(title = "titulo 2", description = "descrição 2", icon = ToolkitIconCatalog.DirectionsCar, iconTint = Color(0xFFDB4437)),
-            ToolkitItemListDTO(title = "titulo 3", description = "descrição 3", icon = ToolkitIconCatalog.PedalBike, iconTint = Color(0xFFF4B400)),
-            ToolkitItemListDTO(title = "titulo 4", description = "descrição 4", icon = ToolkitIconCatalog.Backpack, iconTint = Color(0xFF0F9D58)),
-            ToolkitItemListDTO(title = "titulo 5", description = "descrição 5", icon = ToolkitIconCatalog.ShoppingCart, iconTint = Color(0xFF4285F4))
+            ToolkitItemListUiModel(title = "titulo 1", description = "descrição 1", icon = ToolkitIconCatalog.PhoneAndroid, iconTint = Color(0xFF4285F4)),
+            ToolkitItemListUiModel(title = "titulo 2", description = "descrição 2", icon = ToolkitIconCatalog.DirectionsCar, iconTint = Color(0xFFDB4437)),
+            ToolkitItemListUiModel(title = "titulo 3", description = "descrição 3", icon = ToolkitIconCatalog.PedalBike, iconTint = Color(0xFFF4B400)),
+            ToolkitItemListUiModel(title = "titulo 4", description = "descrição 4", icon = ToolkitIconCatalog.Backpack, iconTint = Color(0xFF0F9D58)),
+            ToolkitItemListUiModel(title = "titulo 5", description = "descrição 5", icon = ToolkitIconCatalog.ShoppingCart, iconTint = Color(0xFF4285F4))
         )
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(horizontal = ToolkitSpacingMd, vertical = ToolkitSpacingXs)
         ) {
             items(devices.size) { index ->
-                ToolkitItemList(item = devices[index])
+                ToolkitItemList(item = devices[index], imageVector = ToolkitIconCatalog.Edit)
             }
         }
     }

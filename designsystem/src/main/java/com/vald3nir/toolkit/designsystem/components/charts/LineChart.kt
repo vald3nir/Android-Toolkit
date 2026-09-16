@@ -28,7 +28,7 @@ import com.vald3nir.toolkit.designsystem.extensions.ToolkitPreviewContainer
 @Composable
 fun ToolkitLineChart(
     modifier: Modifier = Modifier,
-    title: String,
+    title: String? = null,
     data: List<ItemChartDTO>,
     upperLimit: Float? = null,
     lowerLimit: Float? = null,
@@ -51,12 +51,9 @@ fun ToolkitLineChart(
             .fillMaxWidth()
             .padding(vertical = 16.dp)
     ) {
-        ToolkitText(
-            text = title,
-            style = ToolkitTextStyle.TitleMedium,
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
-
+        if (title != null) {
+            ToolkitText(text = title, style = ToolkitTextStyle.TitleMedium)
+        }
         // Container de Scroll
         Box(
             modifier = Modifier

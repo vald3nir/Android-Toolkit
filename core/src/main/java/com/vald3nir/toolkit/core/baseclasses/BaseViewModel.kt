@@ -72,4 +72,19 @@ abstract class BaseViewModel(private val parameters: BaseViewModelParameters) : 
             }
         }
     }
+
+    fun <T> ViewModel.runTaskUiState(action: suspend () -> T, onSuccessEvent: (T) -> Unit = {}): Job {
+        return viewModelScope.launch {
+            runCatching {
+                notifyState(BaseUiState.LoadingState(show = true))
+                action()
+            }.onSuccess { response ->
+                notifyState(BaseUiState.LoadingState(show = false))
+                onSuccessEvent(response)
+            }.onFailure { error ->
+                notifyState(BaseUiState.LoadingState(show = false))
+                error.treatMessage { notifyUiMessage(it) }
+            }
+        }
+    }
 }

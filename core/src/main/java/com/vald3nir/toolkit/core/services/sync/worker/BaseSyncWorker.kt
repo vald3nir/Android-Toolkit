@@ -8,13 +8,13 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 abstract class BaseSyncWorker(
-    private val appName: String,
+    private val notificationTitle: String,
     private val appContext: Context,
     workerParams: WorkerParameters,
     private val ioDispatcher: CoroutineDispatcher
 ) : CoroutineWorker(appContext, workerParams) {
 
-    override suspend fun getForegroundInfo() = appContext.defaultSyncForegroundInfo(appName)
+    override suspend fun getForegroundInfo() = appContext.defaultSyncForegroundInfo(notificationTitle)
 
     abstract suspend fun doSafeWork(): Result
 
