@@ -1,41 +1,49 @@
 package com.vald3nir.toolkit.core.services.rest
 
+import android.content.Context
 import com.google.gson.GsonBuilder
-import okhttp3.Interceptor
+import com.vald3nir.toolkit.core.BuildConfig
+import com.vald3nir.toolkit.core.services.rest.interceptors.ContentTypeInterceptor
+import com.vald3nir.toolkit.core.services.rest.interceptors.CurlLoggingInterceptor
+import com.vald3nir.toolkit.core.services.rest.interceptors.MockInterceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object NetworkingSetup {
 
-    private val baseInterceptors = listOf(
-        loggerInterceptor(),
-        ContentTypeInterceptor(),
-        CurlLoggingInterceptor()
-    )
+    inline fun <reified T> provideApiService(context: Context, baseURL: String): T =
+        buildRetrofit(context, baseURL).create(T::class.java)
 
-    fun buildOkHttpClient(interceptors: List<Interceptor> = baseInterceptors): OkHttpClient {
-        val builder = OkHttpClient.Builder()
+    fun buildRetrofit(context: Context, baseURL: String): Retrofit {
+        val gson = GsonBuilder().create()
+        val client = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
-        interceptors.forEach { interceptor ->
-            builder.addInterceptor(interceptor)
-        }
-        return builder.build()
-    }
-
-    fun buildRetrofit(baseURL: String): Retrofit {
-        val gson = GsonBuilder().setLenient().create()
+            .apply {
+                listOf(
+                    loggerInterceptor(),
+                    ContentTypeInterceptor(),
+                    CurlLoggingInterceptor(),
+                    MockInterceptor(context)
+                ).forEach(::addInterceptor)
+            }
+            .build()
         return Retrofit.Builder()
             .baseUrl(baseURL)
-            .client(buildOkHttpClient())
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
-    inline fun <reified T> provideApiService(baseURL: String): T {
-        return buildRetrofit(baseURL).create(T::class.java)
+    private fun loggerInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
+        }
     }
 }

@@ -42,7 +42,7 @@ private val BarChartPalette = listOf(
 @Composable
 fun ToolkitBarChart(
     modifier: Modifier = Modifier,
-    title: String,
+    title: String? = null,
     data: List<ItemChartDTO>,
     onClickBar: (index: Int) -> Unit = {},
 ) {
@@ -62,7 +62,9 @@ fun ToolkitBarChart(
             .fillMaxWidth()
             .padding(vertical = ToolkitSpacingMd)
     ) {
-        ToolkitText(text = title, style = ToolkitTextStyle.TitleMedium)
+        if (title != null) {
+            ToolkitText(text = title, style = ToolkitTextStyle.TitleMedium)
+        }
 
         Box(
             modifier = Modifier

@@ -1,21 +1,9 @@
-package com.vald3nir.toolkit.core.services.rest
+package com.vald3nir.toolkit.core.services.rest.interceptors
 
-import com.vald3nir.toolkit.core.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
 import okio.Buffer
-
-class ContentTypeInterceptor : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val originalRequest = chain.request()
-        val modifiedRequest = originalRequest.newBuilder()
-            .addHeader("Content-Type", "application/json")
-            .build()
-        return chain.proceed(modifiedRequest)
-    }
-}
 
 class CurlLoggingInterceptor : Interceptor {
 
@@ -48,13 +36,5 @@ class CurlLoggingInterceptor : Interceptor {
         }
 
         return curlBuilder.toString()
-    }
-}
-
-fun loggerInterceptor() = HttpLoggingInterceptor().apply {
-    level = if (BuildConfig.DEBUG) {
-        HttpLoggingInterceptor.Level.BODY
-    } else {
-        HttpLoggingInterceptor.Level.NONE
     }
 }

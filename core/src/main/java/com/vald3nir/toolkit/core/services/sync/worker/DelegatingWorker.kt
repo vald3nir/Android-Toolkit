@@ -22,7 +22,7 @@ interface HiltWorkerFactoryEntryPoint {
 private const val WORKER_CLASS_NAME = "RouterWorkerDelegateClassName"
 private const val SYNC_NOTIFICATION_ID = 0
 
-fun Context.defaultSyncForegroundInfo(appName: String) = ForegroundInfo(SYNC_NOTIFICATION_ID, defaultSyncWorkNotification(appName))
+fun Context.defaultSyncForegroundInfo(notificationTitle: String) = ForegroundInfo(SYNC_NOTIFICATION_ID, defaultSyncWorkNotification(notificationTitle))
 
 fun KClass<out CoroutineWorker>.delegatedData() = Data.Builder().putString(WORKER_CLASS_NAME, qualifiedName).build()
 
