@@ -4,6 +4,7 @@ import com.vald3nir.toolkit.core.services.analytics.notifyLog
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.Period
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
@@ -46,7 +47,19 @@ fun String?.toDateReduced(): String {
     }
 }
 
-fun getISODate() = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.'Z'").withZone(ZoneOffset.UTC).format(Instant.now())
+fun getISODate(): String? = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.'Z'").withZone(ZoneOffset.UTC).format(Instant.now())
+
+fun String.isoToShortDate(): String {
+    return try {
+        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss").withZone(ZoneOffset.UTC)
+        val outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val parsedDate = ZonedDateTime.parse(this, inputFormatter)
+        parsedDate.format(outputFormatter)
+    } catch (e: Exception) {
+        e.notifyLog()
+        this
+    }
+}
 
 fun getShortDate(): String {
     val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -68,7 +81,7 @@ fun String.getElapsedTimeText(): String {
 }
 
 fun String?.isValidBirthdate(maxYearsDifference: Long = 120): Boolean {
-    if(isNullOrEmpty()) return false
+    if (isNullOrEmpty()) return false
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     return runCatching {
         val informedDate = LocalDate.parse(this, formatter)

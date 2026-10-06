@@ -43,6 +43,7 @@ private val BarChartPalette = listOf(
 fun ToolkitBarChart(
     modifier: Modifier = Modifier,
     title: String? = null,
+    subtitle: String? = null,
     data: List<ItemChartDTO>,
     onClickBar: (index: Int) -> Unit = {},
 ) {
@@ -65,7 +66,9 @@ fun ToolkitBarChart(
         if (title != null) {
             ToolkitText(text = title, style = ToolkitTextStyle.TitleMedium)
         }
-
+        if (subtitle != null) {
+            ToolkitText(text = subtitle, style = ToolkitTextStyle.BodySmall)
+        }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -95,8 +98,7 @@ fun ToolkitBarChart(
                     val normalizedHeight = (item.value / maxValue) * chartHeight
                     val topY = (canvasHeight - bottomPadding) - normalizedHeight
                     val baseY = canvasHeight - bottomPadding
-
-                    val baseColor = BarChartPalette[index % BarChartPalette.size]
+                    val baseColor = item.color ?: BarChartPalette[index % BarChartPalette.size]
 
                     drawRect(
                         brush = androidx.compose.ui.graphics.Brush.verticalGradient(

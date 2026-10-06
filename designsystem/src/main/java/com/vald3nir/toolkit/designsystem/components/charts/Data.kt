@@ -16,6 +16,10 @@ data class ProgressChartColorThresholdDTO(
     val color: Color
 )
 
-data class ItemChartDTO(val value: Float, val label: String)
+data class ItemChartDTO(
+    val value: Float,
+    val label: String,
+    val color: Color? = null
+)
 
 fun List<ItemChartDTO>.sum(): Float = sumOf { it.value.toDouble() }.toFloat()
