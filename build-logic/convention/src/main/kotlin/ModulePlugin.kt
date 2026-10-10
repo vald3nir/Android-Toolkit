@@ -38,6 +38,8 @@ class ModulePlugin : Plugin<Project> {
                         "META-INF/*",
                         "META-INF/*.kotlin_module",
                         "META-INF/versions/**",
+                        "**/META-INF/*",
+                        "**/META-INF/*.kotlin_module",
                     )
                 }
             }

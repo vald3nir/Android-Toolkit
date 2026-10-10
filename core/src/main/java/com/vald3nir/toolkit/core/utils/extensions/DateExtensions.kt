@@ -47,7 +47,7 @@ fun String?.toDateReduced(): String {
     }
 }
 
-fun getISODate(): String? = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.'Z'").withZone(ZoneOffset.UTC).format(Instant.now())
+fun getISODate(): String = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.'Z'").withZone(ZoneOffset.UTC).format(Instant.now())
 
 fun String.isoToShortDate(): String {
     return try {
