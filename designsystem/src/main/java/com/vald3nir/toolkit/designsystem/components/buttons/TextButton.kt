@@ -11,6 +11,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.vald3nir.toolkit.designsystem.annotations.ThemePreviews
@@ -42,13 +43,18 @@ fun ToolkitLinkButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     label: String,
+    trailingIcon: ImageVector = ToolkitIconCatalog.ChevronRight,
 ) {
     ToolkitTextButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
         label = label,
-        trailingIcon = ToolkitIconCatalog.ChevronRight
+        trailingIcon = trailingIcon,
+        colors = ButtonDefaults.buttonColors(
+            contentColor = MaterialTheme.colorScheme.primary,
+            containerColor = Color.Transparent
+        )
     )
 }
 
