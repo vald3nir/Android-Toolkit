@@ -66,6 +66,8 @@ fun getShortDate(): String {
     return dateFormat.format(Date())
 }
 
+fun currentYear(): Int = LocalDate.now().year
+
 fun String.getAge(): Int {
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     val birthday = LocalDate.parse(this, formatter)
@@ -79,6 +81,14 @@ fun String.getElapsedTimeText(): String {
     val period = Period.between(informedDate, LocalDate.now())
     return "${period.years} anos, ${period.months} meses e ${period.days} dias"
 }
+
+fun String.toLocalDateTime(): LocalDateTime {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val localDate = LocalDate.parse(this, formatter)
+    return localDate.atStartOfDay()
+}
+
+fun LocalDateTime?.getFormattedDate(): String = this?.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).orEmpty()
 
 fun String?.isValidBirthdate(maxYearsDifference: Long = 120): Boolean {
     if (isNullOrEmpty()) return false

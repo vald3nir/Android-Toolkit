@@ -14,20 +14,21 @@ import java.util.concurrent.TimeUnit
 
 object NetworkingSetup {
 
-    inline fun <reified T> provideApiService(context: Context, baseURL: String): T =
-        buildRetrofit(context, baseURL).create(T::class.java)
+    inline fun <reified T> provideApiService(context: Context, baseURL: String, enableLog: Boolean = false, enableCurl: Boolean = false): T = buildRetrofit(
+        context = context, baseURL = baseURL, enableLog = enableLog, enableCurl = enableCurl
+    ).create(T::class.java)
 
-    fun buildRetrofit(context: Context, baseURL: String): Retrofit {
+    fun buildRetrofit(context: Context, baseURL: String, enableLog: Boolean = false, enableCurl: Boolean = false): Retrofit {
         val gson = GsonBuilder().create()
         val client = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .apply {
-                listOf(
-                    loggerInterceptor(),
+                listOfNotNull(
+                    if (enableLog) loggerInterceptor() else null,
                     ContentTypeInterceptor(),
-                    CurlLoggingInterceptor(),
+                    if (enableCurl) CurlLoggingInterceptor() else null,
                     MockInterceptor(context)
                 ).forEach(::addInterceptor)
             }
