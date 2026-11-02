@@ -4,6 +4,7 @@ package com.toolkit.plugs
 const val composeBomVersion = "2026.06.00"
 const val composeGraphicsVersion = "1.11.3"
 const val composeToolingPreviewVersion = "1.11.3"
+const val composeRuntimeSaveable = "1.13.0"
 const val runtimeLivedataVersion = "1.11.3"
 const val androidxComposeRuntimeTracing = "1.11.3"
 const val composeUiTestManifestVersion = "1.11.3"

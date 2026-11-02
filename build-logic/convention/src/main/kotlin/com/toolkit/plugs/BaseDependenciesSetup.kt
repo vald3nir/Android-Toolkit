@@ -47,6 +47,7 @@ fun Project.setupBaseLibs() {
         add("implementation", "androidx.compose.ui:ui-tooling-preview:$composeToolingPreviewVersion")
         add("implementation", "androidx.compose.runtime:runtime-livedata:$runtimeLivedataVersion")
         add("implementation", "androidx.compose.runtime:runtime-tracing:$androidxComposeRuntimeTracing")
+        add("implementation", "androidx.compose.runtime:runtime-saveable:$composeRuntimeSaveable")
 
         // Image Loader
         add("implementation", "io.coil-kt.coil3:coil-compose:$coil")

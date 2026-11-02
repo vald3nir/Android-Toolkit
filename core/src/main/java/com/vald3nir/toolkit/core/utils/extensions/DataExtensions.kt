@@ -11,7 +11,7 @@ fun Double.formatCurrency(): String {
     return format.format(this)
 }
 
-fun Int.formatNumberWithZeroPrefix(): String = if (this < 10) "0$this" else "$this"
+fun Int.formatNumberWithZeroPrefix(): String = this.toString().padStart(2, '0')
 
 fun Double?.toIntString(): String = if (this == null) "" else "${this.toInt()}"
 
