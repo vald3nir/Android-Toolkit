@@ -80,6 +80,14 @@ fun String.getElapsedTimeText(): String {
     return "${period.years} anos, ${period.months} meses e ${period.days} dias"
 }
 
+fun String.toLocalDateTime(): LocalDateTime {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val localDate = LocalDate.parse(this, formatter)
+    return localDate.atStartOfDay()
+}
+
+fun LocalDateTime?.getFormattedDate(): String = this?.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).orEmpty()
+
 fun String?.isValidBirthdate(maxYearsDifference: Long = 120): Boolean {
     if (isNullOrEmpty()) return false
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
