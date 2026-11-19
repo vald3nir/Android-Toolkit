@@ -73,6 +73,16 @@ abstract class BaseViewModel(private val parameters: BaseViewModelParameters) : 
         }
     }
 
+    fun <T> ViewModel.safeLaunch(action: suspend () -> T): Job {
+        return viewModelScope.launch {
+            runCatching {
+                action()
+            }.onFailure { error ->
+                error.treatMessage { notifyUiMessage(it) }
+            }
+        }
+    }
+
     fun <T> ViewModel.runTaskUiState(action: suspend () -> T, onSuccessEvent: (T) -> Unit = {}): Job {
         return viewModelScope.launch {
             runCatching {

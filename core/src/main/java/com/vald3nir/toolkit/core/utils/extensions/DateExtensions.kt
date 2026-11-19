@@ -67,6 +67,7 @@ fun getShortDate(): String {
 }
 
 fun currentYear(): Int = LocalDate.now().year
+fun currentMonth(): Int = LocalDate.now().month.value
 
 fun String.getAge(): Int {
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
