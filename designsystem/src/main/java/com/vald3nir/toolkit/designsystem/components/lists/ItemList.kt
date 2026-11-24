@@ -61,12 +61,12 @@ fun ToolkitItemList(
         Column(modifier = Modifier.weight(1f)) {
             ToolkitText(
                 text = item.title,
-                style = ToolkitTextStyle.TitleLarge
+                style = ToolkitTextStyle.TitleMedium
             )
             ToolkitSpaceHeight(ToolkitSpacingXs)
             ToolkitText(
                 text = item.description,
-                style = ToolkitTextStyle.TitleSmall
+                style = ToolkitTextStyle.BodyLarge
             )
         }
         if (imageVector != null) {
