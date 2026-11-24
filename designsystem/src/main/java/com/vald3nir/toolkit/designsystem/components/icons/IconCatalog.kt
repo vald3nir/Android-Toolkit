@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.DeviceThermostat
 import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
@@ -42,6 +43,7 @@ import androidx.compose.material.icons.filled.PedalBike
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material.icons.filled.Pin
+import androidx.compose.material.icons.filled.Power
 import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.RemoveCircleOutline
@@ -134,6 +136,8 @@ object ToolkitIconCatalog {
     val Pin = Icons.Default.Pin
     val PhoneAndroid = Icons.Default.PhoneAndroid
     val WaterDrop = Icons.Default.WaterDrop
+    val DeviceThermostat = Icons.Default.DeviceThermostat
+    val Power = Icons.Default.Power
     val Thermometer = Icons.Default.ThermostatAuto
     val QrCodeScanner = Icons.Default.QrCodeScanner
     val Remove = Icons.Default.Remove
