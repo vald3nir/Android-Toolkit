@@ -111,6 +111,7 @@ object ToolkitIconCatalog {
     val DarkMode = Icons.Default.DarkMode
     val DateRange = Icons.Default.DateRange
     val Delete = Icons.Default.Delete
+    val DeviceThermostat = Icons.Default.DeviceThermostat
     val DirectionsCar = Icons.Default.DirectionsCar
     val Downloading = Icons.Outlined.Downloading
     val Edit = Icons.Default.Edit
@@ -133,12 +134,9 @@ object ToolkitIconCatalog {
     val Password = Icons.Default.Password
     val PedalBike = Icons.Default.PedalBike
     val Person = Icons.Default.Person
-    val Pin = Icons.Default.Pin
     val PhoneAndroid = Icons.Default.PhoneAndroid
-    val WaterDrop = Icons.Default.WaterDrop
-    val DeviceThermostat = Icons.Default.DeviceThermostat
+    val Pin = Icons.Default.Pin
     val Power = Icons.Default.Power
-    val Thermometer = Icons.Default.ThermostatAuto
     val QrCodeScanner = Icons.Default.QrCodeScanner
     val Remove = Icons.Default.Remove
     val RemoveCircleOutline = Icons.Default.RemoveCircleOutline
@@ -154,12 +152,14 @@ object ToolkitIconCatalog {
     val SolarPower = Icons.Default.SolarPower
     val Star = Icons.Default.Star
     val Tag = Icons.Outlined.Tag
+    val Thermometer = Icons.Default.ThermostatAuto
     val Upcoming = Icons.Rounded.Upcoming
     val UpcomingBorder = Icons.Outlined.Upcoming
     val ViewDay = Icons.Rounded.ViewDay
     val Visibility = Icons.Default.Visibility
     val VisibilityOff = Icons.Default.VisibilityOff
     val Warning = Icons.Outlined.Warning
+    val WaterDrop = Icons.Default.WaterDrop
     val Wifi = Icons.Outlined.Wifi
     val WifiDevice = wifi_device
     val WifiOff = Icons.Outlined.WifiOff
