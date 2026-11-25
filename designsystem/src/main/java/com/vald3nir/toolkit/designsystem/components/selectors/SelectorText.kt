@@ -1,4 +1,4 @@
-package com.vald3nir.toolkit.designsystem.components.calendar
+package com.vald3nir.toolkit.designsystem.components.selectors
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
