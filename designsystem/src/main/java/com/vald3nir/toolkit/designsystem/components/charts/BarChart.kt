@@ -47,7 +47,7 @@ private val BarChartPalette = listOf(
  * @param title Título exibido acima do gráfico, se informado.
  * @param subtitle Subtítulo exibido abaixo do título, se informado.
  * @param data Valores, rótulos e cores das barras.
- * @param fitBarsToWidth Quando verdadeiro, ajusta todas as barras à largura disponível e desativa a rolagem horizontal.
+ * @param fitToWidth Quando verdadeiro, ajusta todas as barras à largura disponível e desativa a rolagem horizontal.
  * @param useRoundedValue Quando verdadeiro, arredonda os valores exibidos nas barras. Por exemplo, 5625 = 5 K, 10524 = 10 M
  * @param useDecimalValue Quando verdadeiro, exibe os valores com casas decimais.
  * @param onClickBar Ação executada ao tocar numa barra, recebendo o índice do item correspondente em [data].
@@ -58,7 +58,7 @@ fun ToolkitBarChart(
     title: String? = null,
     subtitle: String? = null,
     data: List<ItemChartDTO>,
-    fitBarsToWidth: Boolean = false,
+    fitToWidth: Boolean = false,
     useRoundedValue: Boolean = true,
     useDecimalValue: Boolean = true,
     onClickBar: (index: Int) -> Unit = {},
@@ -96,13 +96,13 @@ fun ToolkitBarChart(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .then(if (fitBarsToWidth) Modifier else Modifier.horizontalScroll(scrollState))
+                .then(if (fitToWidth) Modifier else Modifier.horizontalScroll(scrollState))
         ) {
             // Componente de desenho customizado (Canvas) onde as barras e textos são renderizados manualmente
             Canvas(
                 modifier = Modifier
                     .then(
-                        if (fitBarsToWidth) {
+                        if (fitToWidth) {
                             Modifier
                                 .fillMaxWidth()
                                 .height(maxHeightChart)
@@ -113,9 +113,9 @@ fun ToolkitBarChart(
                         }
                     )
                     // Detecta toques do usuário no canvas para identificar qual barra foi pressionada
-                    .pointerInput(data, fitBarsToWidth) {
+                    .pointerInput(data, fitToWidth) {
                         detectTapGestures { offset ->
-                            val barSlotWidth = if (fitBarsToWidth) {
+                            val barSlotWidth = if (fitToWidth) {
                                 size.width.toFloat() / data.size
                             } else {
                                 totalBarWidth.toPx()
@@ -136,12 +136,12 @@ fun ToolkitBarChart(
                 val barSlotWidth = size.width / data.size
 
                 // Define o espaçamento e a largura efetiva de cada barra dependendo do modo de ajuste
-                val effectiveBarSpacing = if (fitBarsToWidth) {
+                val effectiveBarSpacing = if (fitToWidth) {
                     minOf(barSpacing.toPx(), barSlotWidth * 0.2f)
                 } else {
                     barSpacing.toPx()
                 }
-                val barWidth = if (fitBarsToWidth) {
+                val barWidth = if (fitToWidth) {
                     barSlotWidth - effectiveBarSpacing
                 } else {
                     barWidthFixed.toPx()
@@ -149,7 +149,7 @@ fun ToolkitBarChart(
 
                 // Itera sobre cada item de dado para desenhar sua respectiva barra e textos
                 data.forEachIndexed { index, item ->
-                    val xStart = if (fitBarsToWidth) {
+                    val xStart = if (fitToWidth) {
                         index * barSlotWidth + (effectiveBarSpacing / 2)
                     } else {
                         index * totalBarWidth.toPx() + (effectiveBarSpacing / 2)
@@ -228,7 +228,7 @@ private fun Preview() {
             contentAlignment = Alignment.Center
         ) {
             ToolkitBarChart(
-                fitBarsToWidth = true,
+                fitToWidth = true,
                 title = "Titulo",
                 data = listOf(
                     ItemChartDTO(750f, "Jan"),

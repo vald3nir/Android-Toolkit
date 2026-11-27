@@ -33,16 +33,25 @@ fun ToolkitLineChart(
     upperLimit: Float? = null,
     lowerLimit: Float? = null,
     lineColor: Color = Color(0xFF4A90E2), // Azul padrão
-    upperLimitColor: Color = Color(0xFFFF0000),// Vermelho
+    upperLimitColor: Color = Color(0xFFFF0000), // Vermelho
     lowerLimitColor: Color = Color(0xFF00AA00) // Verde
 ) {
     if (data.isEmpty()) return
 
     val scrollState = rememberScrollState()
-    val textPaint = remember {
+    val axisTextPaint = remember {
         android.graphics.Paint().apply {
             color = android.graphics.Color.GRAY
             textSize = 30f
+            isAntiAlias = true
+        }
+    }
+    val pointValuePaint = remember {
+        android.graphics.Paint().apply {
+            color = android.graphics.Color.LTGRAY
+            textSize = 28f
+            textAlign = android.graphics.Paint.Align.CENTER
+            isAntiAlias = true
         }
     }
 
@@ -73,8 +82,9 @@ fun ToolkitLineChart(
                 val paddingLeft = 80f // Espaço maior para os valores do eixo Y não sumirem no scroll
                 val paddingBottom = 60f
                 val paddingRight = 100f
+                val paddingTop = 56f
                 val chartWidth = width - (paddingLeft + paddingRight)
-                val chartHeight = height - (paddingBottom + 40f)
+                val chartHeight = height - (paddingBottom + paddingTop)
 
                 val maxValue = data.maxOf { it.value }.coerceAtLeast(1.0f)
 
@@ -90,13 +100,13 @@ fun ToolkitLineChart(
                     val fraction = i.toFloat() / ySteps
                     val yValue = maxValue * fraction
                     val yPos = (height - paddingBottom) - (fraction * chartHeight)
-                    textPaint.textAlign = android.graphics.Paint.Align.RIGHT
+                    axisTextPaint.textAlign = android.graphics.Paint.Align.RIGHT
 
                     drawContext.canvas.nativeCanvas.drawText(
                         formatChartValue(yValue),
                         paddingLeft - 20f,
                         yPos + 10f,
-                        textPaint
+                        axisTextPaint
                     )
                 }
 
@@ -106,13 +116,13 @@ fun ToolkitLineChart(
                     val x = paddingLeft + (index * spaceBetweenPoints)
                     val normalizedPower = (item.value / maxValue).coerceIn(0f, 1f)
                     val y = (height - paddingBottom) - (normalizedPower * chartHeight)
-                    textPaint.textAlign = android.graphics.Paint.Align.CENTER
+                    axisTextPaint.textAlign = android.graphics.Paint.Align.CENTER
 
                     drawContext.canvas.nativeCanvas.drawText(
                         item.label,
                         x,
                         height - 10f,
-                        textPaint
+                        axisTextPaint
                     )
 
                     Pair(Offset(x, y), item.value)
@@ -145,13 +155,29 @@ fun ToolkitLineChart(
                         lowerLimitColor = lowerLimitColor
                     )
                     drawCircle(color = pointColor, radius = 6f, center = point)
+
+                    // Evita que o texto ultrapasse o topo do canvas
+                    val labelY = (point.y - 16f).coerceAtLeast(pointValuePaint.textSize)
+                    drawContext.canvas.nativeCanvas.drawText(
+                        formatChartValue(value),
+                        point.x,
+                        labelY,
+                        pointValuePaint
+                    )
                 }
             }
         }
     }
 }
 
-private fun getPointColor(value: Float, upperLimit: Float?, lowerLimit: Float?, lineColor: Color, upperLimitColor: Color, lowerLimitColor: Color) = when {
+private fun getPointColor(
+    value: Float,
+    upperLimit: Float?,
+    lowerLimit: Float?,
+    lineColor: Color,
+    upperLimitColor: Color,
+    lowerLimitColor: Color
+) = when {
     upperLimit != null && value > upperLimit -> upperLimitColor
     lowerLimit != null && value < lowerLimit -> lowerLimitColor
     else -> lineColor
